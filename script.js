@@ -73,7 +73,7 @@ function showFullInfo() {
             }
             return value.json();
         })
-        .then(function (output) {
+        .then((output) => {
             console.log(output);
             movie.innerHTML = `<h4 class="col-12 text-center text-danger">${output.name || output.title}</h4>
             <div class="col-12 text-center">
@@ -90,12 +90,15 @@ function showFullInfo() {
        
        ${(output.last_episode_to_air) ? `<p>${output.number_of_seasons} Season ${output.last_episode_to_air.episode_number} Episodes released</p>` : ""}
                 <p>Description: ${output.overview}</p>
+                <br>
+                <div class="youtube"></div>
             </div>
           </div>`;
+            getVideo(this.dataset.type, this.dataset.id);
         })
         .catch(function (err) {
             movie.innerHTML = 'Oops...something went wrong(';
-            console.error('error: ' + err.status);
+            console.error(err || err.status);
         })
 }
 
@@ -134,8 +137,33 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(function (err) {
             movie.innerHTML = 'Oops...something went wrong(';
             console.error('error: ' + err.status);
-        })
+        });
 });
-//0b5e9f76ec18463b43a4402421d24307
-//panding, resolved, rejected - states of Promises
-//reason = error = err
+
+function getVideo(type, id) {
+    let youtube = movie.querySelector('.youtube');
+    youtube.innerHTML = type;
+    fetch(`https://api.themoviedb.org/3/${type}/${id}/videos?api_key=0b5e9f76ec18463b43a4402421d24307&language=ru`)
+        .then((value) => {
+            if (value.status !== 200) {
+                return Promise.reject(new Error(value.status));
+            }
+            return value.json();
+        })
+        .then((output) => {
+            let videoFrame = '<h4>Video</h4>';
+
+            if (output.results.length === 0) {
+                videoFrame = '<p>Video not exist</p>';
+            }
+
+            output.results.forEach((item) => {
+                videoFrame += '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + item.key + '" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            });
+            youtube.innerHTML = videoFrame;
+        })
+        .catch((err) => {
+            youtube.innerHTML = 'Video not exist';
+            console.log(err || err.status);
+        });
+}

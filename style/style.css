@@ -90,8 +90,9 @@ body h5 {
 #movies {
   justify-content: center;
 }
-.col-12 {
+#movies .col-12 {
   display: flex;
   justify-content: space-around;
+  border-radius: .3rem;
   padding: 0;
 }
