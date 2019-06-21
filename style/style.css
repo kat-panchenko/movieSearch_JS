@@ -1,0 +1,97 @@
+:root {
+  --redColor: #dc3545;
+  --shadow: 0 0 20px 3px rgba(7, 4, 22, 0.7);
+  --background: #3B3F50;
+}
+
+html body {
+  background-color: #21232E;
+  color: white;
+  padding-bottom: 30px;
+}
+body a {
+  color: var(--redColor);
+}
+body a:hover {
+  color: white;
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+  width: auto;
+}
+
+body h4 {
+  margin-bottom: 2rem;
+}
+body h5 {
+  margin-bottom: 1rem;
+}
+.img_poster {
+  height: 360px;
+  box-shadow: var(--shadow);
+  border-radius: .3rem;
+}
+
+.item {
+  text-align: center;
+}
+
+.text-center {
+  text-transform: uppercase;
+}
+
+.spinner {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 10px dashed #aaaaaa;
+  border-right-color: #555555;
+  border-bottom-color: #000000;
+  border-left-color: transparent;
+  animation: spin 500ms infinite linear;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.navbar-brand {
+  text-transform: uppercase;
+  color: var(--redColor);
+}
+
+.item h5 {
+  color: white;
+}
+.container .jumbotron {
+  background-color: var(--background);
+  box-shadow: var(--shadow);
+}
+.jumbotron h3 {
+  color: white;
+}
+
+#search-text {
+  color: var(--redColor);
+  font-weight: bold;
+}
+
+.poster_section, .descript {
+  background-color: var(--background);
+  padding: 25px;
+}
+.poster_section {
+  flex: 0 0 40%;
+}
+#movies {
+  justify-content: center;
+}
+.col-12 {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+}
